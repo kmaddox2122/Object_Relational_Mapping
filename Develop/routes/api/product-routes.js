@@ -8,8 +8,8 @@ router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   try {
-    const productRoute = await Category.findAll({
-      include : [{ model: Product, Category, Tag, ProductTag}],
+    const productRoute = await Product.findAll({
+      include : [{ model: Category, Tag}],
     });
     res.status(200).json(productRoute);
   } catch (err) {
@@ -22,8 +22,8 @@ router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
-    const productRoute = await Category.findByPk(req.params.id,{
-      include: [{ model: Product, Category, Tag, ProductTag }],
+    const productRoute = await Product.findByPk(req.params.id,{
+      include: [{ model: Category, Tag }],
     });
     if (!productRoute) {
       res.status(404).json({ message: 'No category found with that id!' });
@@ -38,7 +38,7 @@ router.get('/:id', async (req, res) => {
 // create new product
 router.post('/', async (req, res) => {
   try {
-    const newCategory = await Category.create(req.body,
+    const newCategory = await Product.create(req.body,
     {
       product_name: "Basketball",
       price: 200.00,
@@ -124,7 +124,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
   try {
-    const deleteRoute = await Category.destroy({
+    const deleteRoute = await Product.destroy({
       where: {
         id: req.params.id,
       },

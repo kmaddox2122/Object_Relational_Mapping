@@ -61,42 +61,42 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
-  Category.destroy({
-    where: {
-      id: req.params.id
-    }
-  })
-    .then(dbData => {
-      if (!dbData){
-        res.status(404).json({message: 'No category found with that id.'});
-        return;
-      }
-      res.json(dbData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-// router.delete('/:id', async (req, res) => {
+// router.delete('/:id', (req, res) => {
 //   // delete a category by its `id` value
-//   try {
-//     const deleteRoute = await Category.destroy({
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
-//     if (!deleteRoute) {
-//       res.status(404).json({ message: 'No category found with that id!' });
-//       return;
+//   Category.destroy({
+//     where: {
+//       id: req.params.id
 //     }
-//     res.status(200).json(deleteRoute);
-//   } catch (err) {
-//     res.status(500).json(err);
-//     console.log(err)
-//   }
+//   })
+//     .then(dbData => {
+//       if (!dbData){
+//         res.status(404).json({message: 'No category found with that id.'});
+//         return;
+//       }
+//       res.json(dbData);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
 // });
+router.delete('/:id', async (req, res) => {
+  // delete a category by its `id` value
+  try {
+    const deleteRoute = await Category.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!deleteRoute) {
+      res.status(404).json({ message: 'No category found with that id!' });
+      return;
+    }
+    res.status(200).json(deleteRoute);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err)
+  }
+});
 
 module.exports = router;
