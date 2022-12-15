@@ -14,9 +14,10 @@ Here is an example of the GET route for the category table in Insomnia:
 
 ![Screenshot](Assets/Screenshot.png)
 
-## Credits
+## Self-Improvement 
 
-Referenced previous class assignments and practices. 
+This project allowed me to utilize and further develop my skills in SQL to create the back-end routes for an e-commerce company.  I also gained more experience with Insomnia and testing the routes written in my code.
+
 
 ## License
 
